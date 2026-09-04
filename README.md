@@ -1,15 +1,19 @@
 # E-Commerce Operations Analysis — SQL
 
 ## Project Overview
-Comprehensive SQL analysis of 100,000+ orders from Olist, a Brazilian 
+Comprehensive SQL analysis of ~100,000 orders from Olist, a Brazilian 
 e-commerce marketplace, to uncover revenue trends, category performance, 
 delivery efficiency, seller quality, and payment behaviour patterns 
 across the platform's full growth journey (2016–2018).
 
+**Dataset Size:** ~100,000 orders | 8 tables | 2016–2018 data  
+**Analysis Coverage:** Revenue trends · Category performance · 
+Delivery efficiency · Seller quality · Payment behaviour
+
 ## Tools & Technologies
 - **Database:** MySQL 8.0
 - **Query Tool:** MySQL Workbench
-- **Dataset:** Brazilian E-Commerce (Olist) — Kaggle
+- **Dataset:** [Brazilian E-Commerce (Olist) — Kaggle (https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 - **Data Cleaning:** Python (resolved CSV encoding issues before import)
 
 ## Database Schema — 8 Tables
@@ -43,7 +47,7 @@ seasonal patterns?
 - From Jan–Aug 2018, revenue consistently exceeded R$966,000 per month, 
   indicating the platform reached sustainable maturity
 
-![Monthly Revenue Trend](file:///Users/khooshimangal/Desktop/ecommerce-SQL-Project/01_monthly_revenue.png)
+![Monthly Revenue Trend](01_monthly_revenue.png)
 
 ---
 
@@ -62,7 +66,7 @@ how do their strategies differ?
 - cool_stuff ranks only 7th in revenue but has the 2nd highest avg 
   item price (R$167.36) — an underexploited high-margin category
 
-![Category Performance](file:///Users/khooshimangal/Desktop/ecommerce-SQL-Project/02_category_performance.png)
+![Category Performance](02_category_performance.png)
 
 ---
 
@@ -81,7 +85,7 @@ performance, and what drives the difference?
 - Rio de Janeiro shows a 0-day minimum delivery — a data anomaly 
   worth investigating for data quality review
 
-![Delivery Performance](file:///Users/khooshimangal/Desktop/ecommerce-SQL-Project/03_delivery_performance.png)
+![Delivery Performance](03_delivery_performance.png)
 
 ---
 
@@ -99,7 +103,7 @@ customer rating correlate with revenue?
   R$51,720 — a **36x difference** — volume strategy matters far 
   more than rating for revenue generation
 
-![Seller Ranking](file:///Users/khooshimangal/Desktop/ecommerce-SQL-Project/04_seller_ranking.png)
+![Seller Ranking](04_seller_ranking.png)
 
 ---
 
@@ -122,12 +126,19 @@ each method reveal about buyer behaviour?
 - 3 transactions flagged as "not_defined" with R$0 value — minor 
   data quality issue documented
 
-![Payment Analysis](file:///Users/khooshimangal/Desktop/ecommerce-SQL-Project/05_payment_analysis.png)
+![Payment Analysis](05_payment_analysis.png)
 
 ---
-
+## How to Reproduce
+1. Download the dataset from the Kaggle link above
+2. Create a MySQL database: `CREATE DATABASE olist_ecommerce;`
+3. Import all 8 CSV files using MySQL Workbench Table Data Import Wizard
+4. Run queries in numbered order from this repository
+5. Note: `olist_order_reviews_dataset.csv` requires UTF-8 encoding 
+   fix before import — use the Python script approach if the wizard 
+   throws an encoding error
+   
 ## SQL Techniques Used
-
 | Technique | Where Applied |
 |---|---|
 | INNER JOIN (multi-table) | Queries 1, 2, 3, 4 |
@@ -140,19 +151,13 @@ each method reveal about buyer behaviour?
 | HAVING clause | Query 4 |
 
 ## Files
-```
-ecommerce-sql-analysis/
-├── README.md
-├── queries/
-│   ├── 01_monthly_revenue_trend.sql
-│   ├── 02_category_performance.sql
-│   ├── 03_delivery_performance.sql
-│   ├── 04_seller_ranking.sql
-│   └── 05_payment_analysis.sql
-└── screenshots/
-    ├── 01_monthly_revenue.png
-    ├── 02_category_performance.png
-    ├── 03_delivery_performance.png
-    ├── 04_seller_ranking.png
-    └── 05_payment_analysis.png
-```
+- `01_monthly_revenue_trend.sql`
+- `02_category_performance.sql`
+- `03_delivery_performance.sql`
+- `04_seller_ranking.sql`
+- `05_payment_analysis.sql`
+- `01_monthly_revenue.png`
+- `02_category_performance.png`
+- `03_delivery_performance.png`
+- `04_seller_ranking.png`
+- `05_payment_analysis.png`
