@@ -128,6 +128,44 @@ each method reveal about buyer behaviour?
 
 ![Payment Analysis](05_payment_analysis.png)
 
+
+---
+
+## Analysis 6 — Delivery Delays and Customer Reviews
+
+**Business Question:** Are late deliveries associated with lower customer review scores?
+
+**Key Findings:**
+- Among delivered orders with valid delivery and estimated dates, 6,534 were late and 89,944 were delivered on time or early.
+- Late-delivery orders had an average review score of **2.27/5**, compared with **4.29/5** for on-time-or-early orders.
+- **62.33%** of reviewed late-delivery orders had an average review score of 2 or lower, versus **9.23%** for on-time-or-early orders.
+- Late orders arrived an average of **10.6 days after** the estimated date. Orders delivered on time or early arrived an average of **13.5 days before** the estimated date.
+
+**Business Implication:** Delivery reliability is a strong candidate for operational improvement because late deliveries are associated with substantially worse customer feedback.
+
+**Limitation:** These results show an association, not proof that delivery delays alone cause poor reviews. Orders without valid delivery or estimated dates were excluded.
+
+SQL file: `05_delivery_review_impact.sql`
+
+---
+
+## Analysis 7 — Seller Delivery Performance Scorecard
+
+**Business Question:** Which sellers should be prioritised for delivery-performance improvement?
+
+**Key Findings:**
+- The scorecard evaluates sellers with at least **50 delivered orders** and returns the 25 sellers with the highest late-delivery percentages.
+- The highest-ranked seller in this result set had **22 late deliveries out of 73 orders**, a late-delivery rate of **30.14%**.
+- This seller had an average review score of **3.14/5**, with **40.58%** of reviewed orders receiving an average score of 2 or lower.
+- Another seller had 389 delivered orders and 74 late deliveries, a **19.02%** late-delivery rate. Its larger delivery volume makes it worth investigating alongside the highest-rate sellers.
+
+**Business Recommendation:** Investigate logistics, dispatch processes and estimated delivery accuracy for sellers with both elevated delay rates and poor review outcomes. Prioritise high-volume sellers where delays affect more orders.
+
+**Limitation:** Reviews are recorded at order level. If an order contains products from multiple sellers, its review score is attributed to each seller involved. These results are an operational screening tool, not proof that an individual seller caused a poor review.
+
+SQL file: `06_seller_delivery_scorecard.sql`
+
+
 ---
 ## How to Reproduce
 1. Download the dataset from the Kaggle link above
@@ -161,3 +199,5 @@ each method reveal about buyer behaviour?
 - `03_delivery_performance.png`
 - `04_seller_ranking.png`
 - `05_payment_analysis.png`
+- `05_delivery_review_impact.sql`
+- `06_seller_delivery_scorecard.sql`
