@@ -29,6 +29,7 @@ delivered_orders AS (
     FROM orders
     WHERE order_status = 'delivered'
       AND order_delivered_customer_date IS NOT NULL
+      AND TRIM(CAST(order_delivered_customer_date AS CHAR)) <> ''
       AND order_estimated_delivery_date IS NOT NULL
 ),
 

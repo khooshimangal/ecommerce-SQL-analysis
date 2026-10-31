@@ -33,6 +33,7 @@ delivery_analysis AS (
 
     WHERE o.order_status = 'delivered'
       AND o.order_delivered_customer_date IS NOT NULL
+      AND TRIM(CAST(o.order_delivered_customer_date AS CHAR)) <> ''
       AND o.order_estimated_delivery_date IS NOT NULL
 )
 

@@ -1,20 +1,23 @@
-# E-Commerce Operations Analysis — SQL
+# E-Commerce Operations Analysis — SQL & Python
 
 ## Project Overview
-Comprehensive SQL analysis of ~100,000 orders from Olist, a Brazilian 
-e-commerce marketplace, to uncover revenue trends, category performance, 
-delivery efficiency, seller quality, and payment behaviour patterns 
-across the platform's full growth journey (2016–2018).
+Comprehensive analysis of approximately 100,000 orders from Olist, a Brazilian e-commerce marketplace. Combining SQL-based business analysis with Python statistical testing to investigate revenue trends, category performance, delivery efficiency, seller quality, payment behaviour, and customer satisfaction across 2016–2018.
 
 **Dataset Size:** ~100,000 orders | 8 tables | 2016–2018 data  
 **Analysis Coverage:** Revenue trends · Category performance · 
 Delivery efficiency · Seller quality · Payment behaviour
 
 ## Tools & Technologies
+
 - **Database:** MySQL 8.0
 - **Query Tool:** MySQL Workbench
-- **Dataset:** [Brazilian E-Commerce (Olist) — Kaggle (https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-- **Data Cleaning:** Python (resolved CSV encoding issues before import)
+- **Programming Language:** Python
+- **Data Analysis:** Pandas
+- **Statistical Testing:** SciPy (Mann–Whitney U test)
+- **Data Visualisation:** Matplotlib
+- **Development Environment:** Jupyter Notebook
+- **Dataset:** [Brazilian E-Commerce (Olist) — Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+- **Data Cleaning:** Python
 
 ## Database Schema — 8 Tables
 
@@ -136,9 +139,9 @@ each method reveal about buyer behaviour?
 **Business Question:** Are late deliveries associated with lower customer review scores?
 
 **Key Findings:**
-- Among delivered orders with valid delivery and estimated dates, 6,534 were late and 89,944 were delivered on time or early.
+- Among delivered orders with valid delivery and estimated dates, 6,534 were late and 89,936 were delivered on time or early.
 - Late-delivery orders had an average review score of **2.27/5**, compared with **4.29/5** for on-time-or-early orders.
-- **62.33%** of reviewed late-delivery orders had an average review score of 2 or lower, versus **9.23%** for on-time-or-early orders.
+- **62.33%** of reviewed late-delivery orders had an average review score of 2 or lower, versus **9.22%** for on-time-or-early orders.
 - Late orders arrived an average of **10.6 days after** the estimated date. Orders delivered on time or early arrived an average of **13.5 days before** the estimated date.
 
 **Business Implication:** Delivery reliability is a strong candidate for operational improvement because late deliveries are associated with substantially worse customer feedback.
@@ -165,6 +168,39 @@ SQL file: `05_delivery_review_impact.sql`
 
 SQL file: `06_seller_delivery_scorecard.sql`
 
+
+---
+
+---
+
+## Analysis 8 — Python Statistical Analysis: Delivery Delays and Customer Satisfaction
+
+**Business Question:** Are late deliveries associated with significantly lower customer review scores?
+
+**Tools:** Python, Pandas, SciPy, Matplotlib
+
+**Analysis Methodology:**
+- Loaded and cleaned the Olist orders and reviews datasets using Pandas.
+- Analysed 96,470 delivered orders with valid delivery dates.
+- Aggregated customer reviews to one average review score per order.
+- Classified orders as late or on time/early based on actual versus estimated delivery dates.
+- Used the Mann–Whitney U test to compare review-score distributions between delivery groups.
+
+**Key Findings:**
+- Late deliveries received an average review score of **2.27/5**, compared with **4.29/5** for on-time or early deliveries.
+- Median review scores were **1 star for late deliveries** and **5 stars for on-time/early deliveries**.
+- **62.36%** of reviewed late-delivery orders received average scores of 2 or lower, compared with **9.23%** of on-time/early orders.
+- The Mann–Whitney U test indicated a statistically significant difference between the two groups (**p < 0.001**).
+
+**Business Implication:** Delivery reliability is an important area for operational improvement. Late deliveries are strongly associated with lower customer satisfaction and a higher proportion of poor reviews.
+
+**Data Quality Limitation:** The original review CSV contained 99,224 records, whereas the MySQL table contained 99,172. The Python analysis uses the original CSV. Eight delivered orders with missing actual delivery dates were excluded. Results demonstrate association, not causation.
+
+**Visualisation:**
+
+![Delivery Review Comparison](reports/figures/06_delivery_review_comparison.png)
+
+**Python Notebook:** `notebooks/07_delivery_review_statistical_analysis.ipynb`
 
 ---
 ## How to Reproduce
@@ -201,3 +237,5 @@ SQL file: `06_seller_delivery_scorecard.sql`
 - `05_payment_analysis.png`
 - `05_delivery_review_impact.sql`
 - `06_seller_delivery_scorecard.sql`
+- `notebooks/07_delivery_review_statistical_analysis.ipynb`
+- `reports/figures/06_delivery_review_comparison.png`
